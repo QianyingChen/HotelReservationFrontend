@@ -1,53 +1,55 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
+export type Room = {
+  roomId?:number;
+  roomType:string;
+  roomDescription:string;
+  price:number;
+  availability:boolean;
+  reservationId?:number;
+  hotelId?:number;
+}
+
 export type Hotel = {
-    id?: number; 
+    hotelId?: number; 
     hotelName: string;
     streetName: string;
     postalCode: string;
     phoneNumber:string;
     email:string;
-    description:String;
+    description:string;
     rating: number;
+    imageUrl:string,
+    location:{
+      locationId?:number,
+      city:string,
+      stateProvince:string
+      country:string
+    }
 }
+
+
+
 
 export const hotelApi = createApi({
     reducerPath: 'hotelApi',
     baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:8080/' }),
     endpoints: (builder) => ({
-      findAllHotels: builder.query<Hotel[], void>({
+      getAllHotels: builder.query<Hotel[], void>({
         query: () => '/hotels',
       }),
-      findHotelById: builder.query<Hotel, number>({
-        query: (id) => `/hotels/${id}`,
+      getHotelsByLocation: builder.query<Hotel[], String>({
+        query: (locationName) => `/hotels/${locationName}`,
       }),
-      createHotel: builder.mutation<Hotel, Hotel>({
-        query: (hotel) => ({
-          method: 'POST',
-          url: '/hotels',
-          body: hotel,
-        }),
-      }),
-      updateHotel: builder.mutation<Hotel, Hotel>({
-        query: (hotel) => ({
-          method: 'PUT',
-          url: `/hotels/${hotel.id}`,
-          body: hotel,
-        }),
-      }),
-      deleteHotel: builder.mutation<void, number>({
-        query: (id) => ({
-          method: 'DELETE',
-          url: `/hotels/${id}`,
-        }),
-      }),
+      getAllRoomsInHotel:builder.query<Room[],void>({
+        query: (hotelId) => `/hotels/${hotelId}/rooms`,
+      }),     
     }),
   });
   
   export const {
-    useFindAllHotelsQuery,
-    useFindHotelByIdQuery,
-    useCreateHotelMutation,
-    useUpdateHotelMutation,
-    useDeleteHotelMutation,
+    useGetAllHotelsQuery,
+    useGetHotelsByLocationQuery,
+    useGetAllRoomsInHotelQuery
+    
   } = hotelApi;
