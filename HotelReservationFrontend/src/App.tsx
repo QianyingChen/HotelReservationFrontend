@@ -16,6 +16,7 @@ function App() {
       <Route path='/hotels' element={<HotelList/>}/>  
       <Route path='/hotels/:id' element={<Hotel/>}/>
       <Route path='/users/:id' element={<User/>}/>
+      <Route path='/rooms/:id/reserve' element={<User/>}/>
        
       </Routes>
     </BrowserRouter>
