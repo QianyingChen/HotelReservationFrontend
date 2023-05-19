@@ -1,20 +1,19 @@
 import { Link } from 'react-router-dom';
 import {Grid,Card,CardMedia,CardContent,Typography,CardActionArea} from '@mui/material';
-import { useGetHotelsByLocationQuery } from '../../api/hotelApi';
+import {  useGetHotelsByLocationQuery } from '../../api/hotelApi';
 
 
 export default function HotelList(){
 
-  const {data:hotels}=useGetHotelsByLocationQuery("newyork");
-
-  console.log(hotels);
-    return(
+ const {data:hotels}=useGetHotelsByLocationQuery("paris");
+   return(
         <>
         <h1>Hotels List Page1</h1>
-        <Grid container spacing={2}>
+      
+        <Grid container spacing={4}>
         {hotels?.map((hotel) => (
         <Grid item xs={12} sm={4} key={hotel.hotelId}>
-          <Link to={`/hotels/${hotel.hotelId}`} key={hotel.hotelId}>
+          <Link to={`/hotels/${hotel.hotelId}`} state={{ hotel }} key={hotel.hotelId}>
         <Card >
           <CardActionArea>
            <CardMedia
@@ -37,7 +36,9 @@ export default function HotelList(){
         </Link>
         </Grid>
         ))}
+       
       </Grid>
+     
         </>
     )
     }
