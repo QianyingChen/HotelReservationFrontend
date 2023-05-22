@@ -26,6 +26,7 @@ export type Room = {
   availability:boolean;
   reservationId?:number;
   hotelId?:number;
+  imageUrl:string;
 }
 
 export type Amenities={
