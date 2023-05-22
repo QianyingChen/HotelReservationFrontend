@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import store from "../store";
 
 export type User = {
-    id?: number;
+    userId?: number;
     firstName: string;
     lastName: string;
     userName: string;
@@ -20,7 +20,7 @@ export const userApi = createApi({
             query: () => '/users'
         }),
         getUserById: builder.query<User, number>({
-            query: id => `users/${id}`
+            query: userId => `users/${userId}`
         }),
         createUser: builder.mutation<User, User>({
             query:(user) => {
@@ -34,15 +34,15 @@ export const userApi = createApi({
         updateUser: builder.mutation<User, User>({
             query: user => ({
                 method:'PUT',
-                url:`/users/${user.id}`,
+                url:`/users/${user.userId}`,
                 body: user
             })
         }),
         deleteUser: builder.mutation<void, number>({
-            query: id => {
+            query: userId => {
                 return {
                     method: 'DELETE',
-                    url:`/users/${id}`
+                    url:`/users/${userId}`
                 }
             }
         })
