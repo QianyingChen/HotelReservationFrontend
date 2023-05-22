@@ -51,9 +51,6 @@ export type Amenities={
 }
 
 
-
-
-
 export const hotelApi = createApi({
     reducerPath: 'hotelApi',
     baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:8080/' }),
@@ -73,6 +70,8 @@ export const hotelApi = createApi({
       }),   
     }),
   });
+
+
   
   export const {
     useGetAllHotelsQuery,

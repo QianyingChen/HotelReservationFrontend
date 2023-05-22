@@ -9,6 +9,41 @@ export default function MultiActionAreaCard() {
   const [location, setLocation] = useState<string>("New York");
   const [adults, setAdults] = useState<number>(2);
   const [children, setChildren] = useState<number>(0);
+  // Get today's date
+  const today = new Date();
+
+  // Calculate the check-out date as one week later
+  const oneWeekLater = new Date(today.getTime() + 7 * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
+
+  // Initialize the check-in and check-out dates using useState hook
+  const [checkInDate, setCheckInDate] = useState(today.toISOString().split('T')[0]);
+  const [checkOutDate, setCheckOutDate] = useState(oneWeekLater);
+
+  // Event handler for check-in date change
+  const handleCheckInDateChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const selectedDate = new Date(event.target.value);
+
+    // Check if the selected date is not a previous date
+    if (selectedDate >= today) {
+      setCheckInDate(event.target.value);
+
+      // Calculate the new check-out date as one week later
+      if (selectedDate <= new Date(checkOutDate)) {
+        setCheckOutDate(new Date(selectedDate.getTime() + 7 * 24 * 60 * 60 * 1000).toISOString().split('T')[0]);
+      }
+    }
+  };
+
+  // Event handler for check-out date change
+  const handleCheckOutDateChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const selectedDate = new Date(event.target.value);
+
+    // Check if the selected date is not a previous date and is later than the check-in date
+    if (selectedDate >= new Date(checkInDate)) {
+      setCheckOutDate(event.target.value);
+    }
+  };
+
 
   const handleNumberChange = (setter: React.Dispatch<React.SetStateAction<number>>) => (event: ChangeEvent<HTMLInputElement>) => {
     const value = parseInt(event.target.value, 10);
@@ -40,11 +75,27 @@ export default function MultiActionAreaCard() {
             </Grid>
 
             <Grid item xs={12} sm={6}>
-              <TextField label="Check-in" variant="outlined" fullWidth />
+             <TextField
+                label="Check-in"
+                type="date"
+                variant="outlined"
+                fullWidth
+                value={checkInDate}
+                onChange={handleCheckInDateChange}
+                inputProps={{ min: today.toISOString().split('T')[0] }}
+              />
             </Grid>
             <Grid item xs={12} sm={6}>
-              <TextField label="Check-out" variant="outlined" fullWidth />
-            </Grid>
+              <TextField
+                label="Check-out"
+                type="date"
+                variant="outlined"
+                fullWidth
+                value={checkOutDate}
+                onChange={handleCheckOutDateChange}
+                inputProps={{ min: checkInDate }}
+              />
+             </Grid>
 
             <Grid item xs={12} sm={6}>
               <TextField 
