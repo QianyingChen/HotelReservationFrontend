@@ -1,20 +1,34 @@
-import { Link } from 'react-router-dom';
-import {Grid,Card,CardMedia,CardContent,Typography,CardActionArea} from '@mui/material';
+import {useState,useEffect} from 'react';
+import { Link,useParams } from 'react-router-dom';
+import {Grid,Card,CardMedia,CardContent,Typography,CardActionArea, Alert, Tooltip,Fade} from '@mui/material';
 import {  useGetHotelsByLocationQuery } from '../../api/hotelApi';
 
 
 export default function HotelList(){
+  const { locationName } = useParams();
+  const {data:hotels}=useGetHotelsByLocationQuery(locationName);
+  
+  const [currentlyNotAvailable ,setCurrentlyNotAvailable]=useState<String>();
 
- const {data:hotels}=useGetHotelsByLocationQuery("paris");
-   return(
+  useEffect(() => {
+    if (locationName == null||hotels == null) {
+      setCurrentlyNotAvailable(
+      <Alert severity="info">We are currently offering hotels in the following locations..</Alert>
+        );
+    }
+  }, [locationName]);
+
+  return(
         <>
         <h1>Hotels List Page1</h1>
-      
+        
+        <h6>{currentlyNotAvailable}</h6>
         <Grid container spacing={4}>
         {hotels?.map((hotel) => (
         <Grid item xs={12} sm={4} key={hotel.hotelId}>
-          <Link to={`/hotels/${hotel.hotelId}`} state={{ hotel }} key={hotel.hotelId}>
+          <Link to={`/hotels/${hotel.hotelId}/rooms`} state={{ hotel }} key={hotel.hotelId}>
         <Card >
+        <Tooltip TransitionComponent={Fade} title={hotel.description}>
           <CardActionArea>
            <CardMedia
             component="img"
@@ -23,15 +37,14 @@ export default function HotelList(){
             alt={hotel.hotelName}
           />
           <CardContent>
+            
             <Typography variant="h5" component="div">
               {hotel.hotelName}
             </Typography>
-            <Typography variant="body2" color="text.secondary">
-              {hotel.description}
-            </Typography>
+                   
             </CardContent>
           </CardActionArea>
-          
+          </Tooltip>
         </Card>
         </Link>
         </Grid>

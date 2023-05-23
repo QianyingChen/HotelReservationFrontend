@@ -14,11 +14,11 @@ function App() {
       <Navbar />
       <Routes>
       <Route path='/' element={<Home/>}/>
-      <Route path='/hotels' element={<HotelList/>}/>  
-      <Route path='/hotels/:id' element={<Hotel/>}/>
+      <Route path='/hotels/' element={<HotelList/>}/>   
+      <Route path='/hotels/:locationName' element={<HotelList/>}/> 
+      <Route path='/hotels/:id/rooms' element={<Hotel/>}/>
       <Route path='/users/:id' element={<User/>}/>
       <Route path='/rooms/:id/reserve' element={<User/>}/>
-       
       </Routes>
 
     </BrowserRouter>
