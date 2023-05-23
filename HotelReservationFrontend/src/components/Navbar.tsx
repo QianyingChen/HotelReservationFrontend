@@ -27,7 +27,7 @@ export default function Navbar() {
       <Link to='/' className='logo'>Grand Vista</Link>
       
       <ul>                  
-          <CustomLink to='/hotels'>Hotels</CustomLink>
+          <CustomLink to='/hotels'>Hotels</CustomLink> 
           <CustomLink to='/register'>Register</CustomLink>
           <CustomLink to='/signin'>Sign in</CustomLink>
 

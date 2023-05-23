@@ -1,12 +1,11 @@
 import { ChangeEvent, useState } from 'react';
 import { Button, Card, CardActionArea, CardActions, CardContent, Grid, TextField, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
-import { DateRangePicker } from 'react-date-range';
 import 'react-date-range/dist/styles.css'; 
 import 'react-date-range/dist/theme/default.css'; 
 
 export default function MultiActionAreaCard() {
-  const [location, setLocation] = useState<string>("New York");
+  const [locationName, setLocationName] = useState<string>("New York");
   const [adults, setAdults] = useState<number>(2);
   const [children, setChildren] = useState<number>(0);
   // Get today's date
@@ -69,8 +68,8 @@ export default function MultiActionAreaCard() {
                 label="Location" 
                 variant="outlined" 
                 fullWidth
-                value={location}
-                onChange={(e) => setLocation(e.target.value)}
+                value={locationName}
+                onChange={(e) => setLocationName(e.target.value)}
               />
             </Grid>
 
@@ -121,7 +120,8 @@ export default function MultiActionAreaCard() {
         </CardContent>
       </CardActionArea>
       <CardActions>
-         <Button 
+      <Link  to={`/hotels/${locationName}`} >
+        <Button 
             variant="contained" 
             size="large"
             // component={Link}
@@ -132,6 +132,7 @@ export default function MultiActionAreaCard() {
           >
             Search
           </Button>
+          </Link>
       </CardActions>
     </Card>
   );

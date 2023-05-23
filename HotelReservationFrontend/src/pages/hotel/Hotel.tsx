@@ -58,7 +58,7 @@ export default function Hotel(){
             </Grid>
                {rooms?.map((room:Room) => (
         <Grid item xs={12} sm={4} key={room.roomId}>
-          <Link to={`/rooms/${room.roomId}/reserve`} key={room.roomId}> 
+          
         <Card >
         
            <CardMedia
@@ -78,11 +78,12 @@ export default function Hotel(){
                  
           <CardActions style={{ justifyContent: 'space-between' }}>
           <Typography variant="h6"  component="div" >${room.price}</Typography> 
+          <Link to={`/rooms/${room.roomId}/reserve`} key={room.roomId}> 
                 <Button  variant="contained" size="small">Reserve</Button>
-                
+             </Link>   
           </CardActions>
         </Card>
-        </Link>
+        
         </Grid>
          ))}
          </Grid>
