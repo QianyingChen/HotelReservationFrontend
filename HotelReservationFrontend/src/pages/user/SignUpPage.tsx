@@ -56,7 +56,7 @@ const SignUpForm = () => {
     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '88vh' }}>
       <Card style={{ width: '300px' }}>
         <CardContent>
-          <h1 style={{ textAlign: 'center' }}>Sign Up Page</h1>
+          <h1 style={{ textAlign: 'center' }}>Sign Up</h1>
           <form onSubmit={handleSubmit(onSubmit)} noValidate>
             <Grid container spacing={2}>
             <Grid item xs={12}>
