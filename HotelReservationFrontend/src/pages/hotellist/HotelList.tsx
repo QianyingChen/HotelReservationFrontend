@@ -1,5 +1,5 @@
 import {useState,useEffect} from 'react';
-import { Link,useParams } from 'react-router-dom';
+import { Link,useLocation,useParams } from 'react-router-dom';
 import {Grid,Card,CardMedia,CardContent,Typography,CardActionArea, Alert, Tooltip,Fade} from '@mui/material';
 import {  useGetHotelsByLocationQuery } from '../../api/hotelApi';
 
@@ -7,6 +7,11 @@ import {  useGetHotelsByLocationQuery } from '../../api/hotelApi';
 export default function HotelList(){
   const { locationName } = useParams();
   const {data:hotels}=useGetHotelsByLocationQuery(locationName);
+
+  const myFormData  = useLocation();
+  console.log(myFormData.state?.inDate);
+
+    // const roomSelected = roomDetails.state?.room;
   
   const [currentlyNotAvailable ,setCurrentlyNotAvailable]=useState<String>();
 

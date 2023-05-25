@@ -6,6 +6,7 @@ import Hotel from './pages/hotel/Hotel'
 import User from './pages/user/User'
 import Navbar from './components/Navbar'
 import SignUpPage from './pages/user/SignUpPage'
+import HomeCard from './components/HomeCard'
 
 function App() {
  

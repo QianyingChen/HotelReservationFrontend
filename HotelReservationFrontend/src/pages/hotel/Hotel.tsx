@@ -12,7 +12,11 @@ export default function Hotel(){
     const {data:rooms}=useGetAllRoomsInHotelQuery(id);
     const{data:amenities}=useGetAllAmenitiesInHotelQuery(id);
     const hotelLocation = useLocation();
-    const hotelSelected = hotelLocation.state?.hotel;
+    const{hotelData,checkInDate}=hotelLocation.state;
+    const hotelSelected = hotelLocation.state?.hotel; 
+
+    // const{hotelData,checkInDate}=hotelLocation.state;
+    // const hotelSelected = hotelData.state?.hotel; 
 
     /** Get address of the selected hotel */
     const address=`${hotelSelected.streetName}, 
@@ -78,7 +82,7 @@ export default function Hotel(){
                  
           <CardActions style={{ justifyContent: 'space-between' }}>
           <Typography variant="h6"  component="div" >${room.price}</Typography> 
-          <Link to={`/rooms/${room.roomId}/reserve`} key={room.roomId}> 
+          <Link to={`/rooms/${room.roomId}/reserve`} state={{room,checkInDate}}  key={room.roomId}> 
                 <Button  variant="contained" size="small">Reserve</Button>
              </Link>   
           </CardActions>

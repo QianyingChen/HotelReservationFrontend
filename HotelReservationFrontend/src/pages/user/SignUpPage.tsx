@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Button, Card, CardContent, Grid, Snackbar, TextField } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useCreateUserMutation } from '../../api/userApi';
 
 type SignUpFormData = {
@@ -59,7 +59,7 @@ const SignUpForm = () => {
           <h1 style={{ textAlign: 'center' }}>Sign Up</h1>
           <form onSubmit={handleSubmit(onSubmit)} noValidate>
             <Grid container spacing={2}>
-            <Grid item xs={12}>
+             <Grid item xs={12}>
                 <TextField
                   {...register('firstName', {
                     required: 'First name is required',
@@ -131,14 +131,17 @@ const SignUpForm = () => {
                   fullWidth
                   label="Phone Number"
                   error={!!errors.phoneNumber}
-                  helperText={errors.phoneNumber?.message}
+                  helperText={errors.phoneNumber?.message} 
                 />
               </Grid>
             </Grid>
-            <Grid item xs={12}>
+            <Grid item xs={12} >
               <Button variant="contained" type="submit" fullWidth>
                 Submit
               </Button>
+            </Grid>
+            <Grid item xs={12} sx={{ textAlign: 'center', mt: 2 }}>
+              <Link to="/signin">Already have an account? Sign in</Link>
             </Grid>
           </form>
         </CardContent>
