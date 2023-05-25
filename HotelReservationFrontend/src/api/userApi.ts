@@ -5,7 +5,7 @@ export type User = {
     userId?: number;
     firstName: string;
     lastName: string;
-    userName: string;
+    username: string;
     password: string;
     email: string;
     phoneNumber: string;
@@ -26,7 +26,7 @@ export const userApi = createApi({
             query:(user) => {
                 return {
                     method: 'POST',
-                    url:'users',
+                    url:'/users',
                     body: user
                 }
             }

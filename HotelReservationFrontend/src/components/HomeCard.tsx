@@ -3,6 +3,9 @@ import { Button, Card, CardActionArea, CardActions, CardContent, Grid, TextField
 import { Link } from 'react-router-dom';
 import 'react-date-range/dist/styles.css'; 
 import 'react-date-range/dist/theme/default.css'; 
+import User from '../pages/user/User';
+
+
 
 export default function MultiActionAreaCard() {
   const [locationName, setLocationName] = useState<string>("New York");
@@ -50,6 +53,18 @@ export default function MultiActionAreaCard() {
       setter(value);
     }
   };
+
+  const myFormData  = {
+    inDate:"hello",
+    outDate:checkOutDate,
+    adultsCount:adults,
+  }
+
+
+
+
+
+  
 
   return (
     <Card sx={{ maxWidth: 500, boxShadow: 6 }} >
@@ -120,15 +135,10 @@ export default function MultiActionAreaCard() {
         </CardContent>
       </CardActionArea>
       <CardActions>
-      <Link  to={`/hotels/${locationName}`} >
+      <Link  to={`/hotels/${locationName}`} state={{myFormData}} >
         <Button 
             variant="contained" 
             size="large"
-            // component={Link}
-            // to={{
-            //   pathname: '/search',
-            //   state: { location, value, adults, children }
-            // }}
           >
             Search
           </Button>

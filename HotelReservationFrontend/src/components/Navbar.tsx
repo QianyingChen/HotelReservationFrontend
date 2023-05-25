@@ -28,7 +28,7 @@ export default function Navbar() {
       
       <ul>                  
           <CustomLink to='/hotels'>Hotels</CustomLink> 
-          <CustomLink to='/register'>Register</CustomLink>
+          <CustomLink to='/users/signup'>Register</CustomLink>
           <CustomLink to='/signin'>Sign in</CustomLink>
 
            {/* Right - Language and User options */}
