@@ -3,7 +3,7 @@
  */
 
 import { Link,useParams,useLocation } from 'react-router-dom';
-import {Grid,Card,CardMedia,CardContent,Typography,CardActionArea,CardActions,Button,CardHeader} from '@mui/material';
+import {Grid,Card,CardMedia,CardContent,Typography,CardActions,Button,CardHeader} from '@mui/material';
 import { useGetAllRoomsInHotelQuery,useGetAllAmenitiesInHotelQuery, Amenities, Room} from '../../api/hotelApi';
 
 export default function Hotel(){
@@ -80,7 +80,7 @@ export default function Hotel(){
           <Typography variant="h6"  component="div" >${room.price}</Typography> 
           <Link to={`/rooms/${room.roomId}/reserve`} key={room.roomId}> 
                 <Button  variant="contained" size="small">Reserve</Button>
-             </Link>   
+          </Link>   
           </CardActions>
         </Card>
         

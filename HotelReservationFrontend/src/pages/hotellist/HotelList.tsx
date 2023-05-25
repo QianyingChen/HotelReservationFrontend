@@ -8,7 +8,7 @@ export default function HotelList(){
   const { locationName } = useParams();
   const {data:hotels}=useGetHotelsByLocationQuery(locationName);
   
-  const [currentlyNotAvailable ,setCurrentlyNotAvailable]=useState<String>();
+  const [currentlyNotAvailable ,setCurrentlyNotAvailable]=useState<JSX.Element | null>(null);
 
   useEffect(() => {
     if (locationName == null||hotels == null) {
