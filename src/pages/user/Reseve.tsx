@@ -28,7 +28,7 @@ console.log(roomSelected.roomDescription);
 
     return(
         <>
-        <h1>User page</h1>
+        <h1>Reserve page</h1>
         <Box sx={{ margin: '45px' }}> 
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6} >
