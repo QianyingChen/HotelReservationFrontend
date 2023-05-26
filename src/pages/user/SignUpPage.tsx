@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Button, Card, CardContent, Grid, Snackbar, TextField } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
@@ -17,7 +17,8 @@ const SignUpForm = () => {
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState('');
   const { register, handleSubmit, formState: { errors } } = useForm<SignUpFormData>();
-  const [createUser, { isError }] = useCreateUserMutation();
+  //const [createUser, { isError }] = useCreateUserMutation();
+  const [createUser] = useCreateUserMutation();
   const navigate = useNavigate();
 
   const onSubmit = async (data: SignUpFormData) => {

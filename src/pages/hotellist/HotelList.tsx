@@ -1,7 +1,7 @@
 import {useState,useEffect} from 'react';
 import { Link,useLocation,useParams } from 'react-router-dom';
 import {Grid,Card,CardMedia,CardContent,Typography,CardActionArea, Alert, Tooltip,Fade} from '@mui/material';
-import {  useGetHotelsByLocationQuery } from '../../api/hotelApi';
+import {  useGetHotelsByLocationQuery,Hotel} from '../../api/hotelApi';
 
 
 export default function HotelList(){
@@ -29,7 +29,7 @@ export default function HotelList(){
         
         <h6>{currentlyNotAvailable}</h6>
         <Grid container spacing={4}>
-        {hotels?.map((hotel) => (
+        {hotels?.map((hotel:Hotel) => (
         <Grid item xs={12} sm={4} key={hotel.hotelId}>
           <Link to={`/hotels/${hotel.hotelId}/rooms`} state={{ hotel }} key={hotel.hotelId}>
         <Card >
