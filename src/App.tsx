@@ -6,7 +6,7 @@ import Hotel from './pages/hotel/Hotel'
 import User from './pages/user/User'
 import Navbar from './components/Navbar'
 import SignUpPage from './pages/user/SignUpPage'
-import HomeCard from './components/HomeCard'
+import SignInPage from './pages/user/SignInPage'
 
 function App() {
  
@@ -22,6 +22,7 @@ function App() {
       <Route path='/users/:id' element={<User/>}/>
       <Route path='/rooms/:id/reserve' element={<User/>}/>
       <Route  path="/users/signup" element={<SignUpPage/>} />
+      <Route  path="/users/signin" element={<SignInPage/>} />
       </Routes>
 
     </BrowserRouter>

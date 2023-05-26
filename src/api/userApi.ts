@@ -11,6 +11,12 @@ export type User = {
     phoneNumber: string;
 }
 
+interface SignInFormData {
+    username: string;
+    password: string;
+  }
+  
+
 export const userApi = createApi({
     reducerPath:'userApi',
     baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:8080/' }),
@@ -45,6 +51,13 @@ export const userApi = createApi({
                     url:`/users/${userId}`
                 }
             }
+        }),
+        signInUser: builder.mutation<User, SignInFormData>({
+            query: (formData) => ({
+              method: 'POST',
+              url: '/users/signin',
+              body: formData
+            })
         })
     })
 });
@@ -54,5 +67,6 @@ export const {
     useGetUserByIdQuery,
     useCreateUserMutation,
     useUpdateUserMutation,
-    useDeleteUserMutation
+    useDeleteUserMutation,
+    useSignInUserMutation
 } = userApi;

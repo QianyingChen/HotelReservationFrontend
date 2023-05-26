@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Button, Card, CardContent, Grid, Snackbar, TextField } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
@@ -141,7 +141,7 @@ const SignUpForm = () => {
               </Button>
             </Grid>
             <Grid item xs={12} sx={{ textAlign: 'center', mt: 2 }}>
-              <Link to="/signin">Already have an account? Sign in</Link>
+              <Link to="/users/signin">Already have an account? Sign in</Link>
             </Grid>
           </form>
         </CardContent>

@@ -29,7 +29,7 @@ export default function Navbar() {
       <ul>                  
           <CustomLink to='/hotels'>Hotels</CustomLink> 
           <CustomLink to='/users/signup'>Register</CustomLink>
-          <CustomLink to='/signin'>Sign in</CustomLink>
+          <CustomLink to='/users/signin'>Sign in</CustomLink>
 
            {/* Right - Language and User options */}
            <Box display="flex" justifyContent="flex-end">
@@ -63,7 +63,7 @@ export default function Navbar() {
 interface CustomLinkProps {
   to: string;
   children: React.ReactNode;
-  [x: string]: any;   //to allow for additional props
+  [x: string]: any;   
 }
 
 function CustomLink({ to, children, ...props }: CustomLinkProps) {
