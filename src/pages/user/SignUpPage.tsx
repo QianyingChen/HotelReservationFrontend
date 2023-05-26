@@ -17,7 +17,8 @@ const SignUpForm = () => {
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState('');
   const { register, handleSubmit, formState: { errors } } = useForm<SignUpFormData>();
-  const [createUser, { isError }] = useCreateUserMutation();
+  //const [createUser, { isError }] = useCreateUserMutation();
+  const [createUser] = useCreateUserMutation();
   const navigate = useNavigate();
 
   const onSubmit = async (data: SignUpFormData) => {

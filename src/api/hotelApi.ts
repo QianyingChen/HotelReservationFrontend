@@ -59,7 +59,7 @@ export const hotelApi = createApi({
       getAllHotels: builder.query<Hotel[], void>({
         query: () => '/hotels',
       }),
-      getHotelsByLocation: builder.query<Hotel[], String>({
+      getHotelsByLocation: builder.query({
         query: (locationName) => `/hotels/${locationName}`,
       }),
       getAllRoomsInHotel:builder.query({

@@ -1,6 +1,6 @@
 import { useLocation } from 'react-router-dom';
 
-import {Grid,Card,CardMedia,CardContent,Typography,CardActionArea,CardActions,Button,CardHeader, Box} from '@mui/material';
+import {Grid,Card,CardMedia,CardContent,Typography,CardHeader, Box} from '@mui/material';
 
 
 export default function User(){

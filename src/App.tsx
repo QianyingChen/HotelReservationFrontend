@@ -10,7 +10,6 @@ import SignInPage from './pages/user/SignInPage'
 
 function App() {
  
-
   return (
     <BrowserRouter>
       <Navbar />

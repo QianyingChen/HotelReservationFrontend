@@ -12,7 +12,7 @@ export default function Hotel(){
     const {data:rooms}=useGetAllRoomsInHotelQuery(id);
     const{data:amenities}=useGetAllAmenitiesInHotelQuery(id);
     const hotelLocation = useLocation();
-    const{hotelData,checkInDate}=hotelLocation.state;
+    const{checkInDate}=hotelLocation.state;
     const hotelSelected = hotelLocation.state?.hotel; 
 
     // const{hotelData,checkInDate}=hotelLocation.state;

@@ -5,8 +5,8 @@ import  { useState } from "react";
 import 'react-date-range/dist/styles.css'; 
 import 'react-date-range/dist/theme/default.css'; 
 import "./navbar.css"
-import { Box, IconButton, InputBase, Menu, MenuItem } from "@mui/material";
-import SearchIcon from '@mui/icons-material/Search';
+import { Box, IconButton,  Menu, MenuItem } from "@mui/material";
+//import SearchIcon from '@mui/icons-material/Search';
 
 
 export default function Navbar() {
