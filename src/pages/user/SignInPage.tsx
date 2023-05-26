@@ -14,7 +14,8 @@ const SignInForm = () => {
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState('');
   const { register, handleSubmit, formState: { errors } } = useForm<SignInFormData>();
-  const [signInUser, { isError }] = useSignInUserMutation();
+ // const [signInUser, { isError }] = useSignInUserMutation();
+  const [signInUser] = useSignInUserMutation();
   const navigate = useNavigate();
 
   const onSubmit = async (data: SignInFormData) => {
