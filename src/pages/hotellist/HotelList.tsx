@@ -1,12 +1,12 @@
 import {useState,useEffect} from 'react';
-import { Link,useLocation,useParams } from 'react-router-dom';
+import { Link,useParams } from 'react-router-dom';
 import {Grid,Card,CardMedia,CardContent,Typography,CardActionArea, Alert, Tooltip,Fade} from '@mui/material';
 import {  useGetHotelsByLocationQuery,Hotel} from '../../api/hotelApi';
 
 
 export default function HotelList(){
   const { locationName } = useParams();
-  const {data:hotels}=useGetHotelsByLocationQuery("paris");
+  const {data:hotels}=useGetHotelsByLocationQuery(locationName);
 
   // const myFormData  = useLocation();
   // console.log(myFormData.state?.inDate);
