@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import 'react-date-range/dist/styles.css'; 
 import 'react-date-range/dist/theme/default.css'; 
 //import User from '../pages/user/Reseve';
+import { useTranslation } from 'react-i18next';
+
 
 
 
@@ -60,27 +62,23 @@ export default function MultiActionAreaCard() {
     adultsCount:adults,
   }
 
-
-
-
-
-  
+  const {t}=useTranslation();
 
   return (
     <Card sx={{ maxWidth: 500, boxShadow: 6 }} >
       <CardActionArea>
         <CardContent>
           <Typography gutterBottom variant="h4" component="div" fontWeight="bold">
-            Find places to stay on Grand Vista
+           {t('Find places to stay on Grand Vista')}
           </Typography>
           <Typography variant="body1" color="text.secondary">
-            Discover hotels and rooms perfect for any trip
+           {t('Discover hotels and rooms perfect for any trip')}
           </Typography>
 
           <Grid container spacing={1} marginTop={4}>
             <Grid item xs={20} sm={12}>
               <TextField 
-                label="Location" 
+                label={t('Location')} 
                 variant="outlined" 
                 fullWidth
                 value={locationName}
@@ -90,7 +88,7 @@ export default function MultiActionAreaCard() {
 
             <Grid item xs={12} sm={6}>
              <TextField
-                label="Check-in"
+                label={t('Check-in')}
                 type="date"
                 variant="outlined"
                 fullWidth
@@ -101,7 +99,7 @@ export default function MultiActionAreaCard() {
             </Grid>
             <Grid item xs={12} sm={6}>
               <TextField
-                label="Check-out"
+                label={t('Check-out')}
                 type="date"
                 variant="outlined"
                 fullWidth
@@ -113,7 +111,7 @@ export default function MultiActionAreaCard() {
 
             <Grid item xs={12} sm={6}>
               <TextField 
-                label="Adults" 
+                label={t('Adults')}
                 variant="outlined" 
                 fullWidth 
                 type="number"
@@ -123,7 +121,7 @@ export default function MultiActionAreaCard() {
             </Grid>
             <Grid item xs={12} sm={6}>
               <TextField 
-                label="Children" 
+                label={t('Children')}  
                 variant="outlined" 
                 fullWidth 
                 type="number"
@@ -140,7 +138,7 @@ export default function MultiActionAreaCard() {
             variant="contained" 
             size="large"
           >
-            Search
+            {t('Search')} 
           </Button>
           </Link>
       </CardActions>

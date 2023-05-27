@@ -7,7 +7,7 @@ import 'react-date-range/dist/theme/default.css';
 import "./navbar.css"
 import { Box, IconButton,  Menu, MenuItem } from "@mui/material";
 //import SearchIcon from '@mui/icons-material/Search';
-
+import { useTranslation } from 'react-i18next';
 
 export default function Navbar() {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -20,6 +20,7 @@ export default function Navbar() {
     setAnchorEl(null);
   };
 
+  const {t,i18n}=useTranslation();
 
   return (
     <nav className='nav'>
@@ -27,9 +28,9 @@ export default function Navbar() {
       <Link to='/' className='logo'>Grand Vista</Link>
       
       <ul>                  
-          <CustomLink to='/hotels'>Hotels</CustomLink> 
-          <CustomLink to='/users/signup'>Register</CustomLink>
-          <CustomLink to='/users/signin'>Sign in</CustomLink>
+          <CustomLink to='/hotels'>{t('Hotels')}</CustomLink> 
+          <CustomLink to='/users/signup'>{t('Register')}</CustomLink>
+          <CustomLink to='/users/signin'>{t('Sign in')}</CustomLink>
 
            {/* Right - Language and User options */}
            <Box display="flex" justifyContent="flex-end">
@@ -51,9 +52,18 @@ export default function Navbar() {
                   <MenuItem onClick={handleMenuClose} >Sign In</MenuItem>
                   <MenuItem onClick={handleMenuClose}>Sign Up</MenuItem>
                 </Menu>
-                <IconButton color="inherit">
+                <IconButton color="inherit"  onClick={handleMenuOpen}>
                   <LanguageIcon fontSize="medium"/>
                 </IconButton>
+                <Menu
+                  anchorEl={anchorEl}
+                  open={Boolean(anchorEl)}
+                  onClose={handleMenuClose}
+                >
+                  <MenuItem onClick={()=>i18n.changeLanguage('en')} >{t('English')}</MenuItem>
+                  <MenuItem onClick={()=>i18n.changeLanguage('ta')}>{t('Tamil')}</MenuItem>
+                  <MenuItem onClick={()=>i18n.changeLanguage('zh')}>{t('Chinese')}</MenuItem>
+                </Menu>
               </Box>
       </ul>
     

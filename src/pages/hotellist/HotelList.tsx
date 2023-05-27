@@ -6,10 +6,10 @@ import {  useGetHotelsByLocationQuery,Hotel} from '../../api/hotelApi';
 
 export default function HotelList(){
   const { locationName } = useParams();
-  const {data:hotels}=useGetHotelsByLocationQuery(locationName);
+  const {data:hotels}=useGetHotelsByLocationQuery("paris");
 
-  const myFormData  = useLocation();
-  console.log(myFormData.state?.inDate);
+  // const myFormData  = useLocation();
+  // console.log(myFormData.state?.inDate);
 
     // const roomSelected = roomDetails.state?.room;
   
