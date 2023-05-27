@@ -54,7 +54,7 @@ export type Amenities={
 
 export const hotelApi = createApi({
     reducerPath: 'hotelApi',
-    baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:8080/' }),
+    baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:5000/' }),
     endpoints: (builder) => ({
       getAllHotels: builder.query<Hotel[], void>({
         query: () => '/hotels',
