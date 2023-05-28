@@ -30,12 +30,13 @@ const SignUpForm = () => {
         password: data.password,
         email: data.email,
         phoneNumber: data.phoneNumber,
+        id: undefined
       });
-
+  
       if ('data' in response) {
         setSnackbarMessage('User signed up successfully!');
         setOpenSnackbar(true);
-        navigate('/user'); // Redirect to the user page
+        navigate(`/users/${response.data.userId}`); // Redirect to the user page with the user ID
       } else {
         throw new Error('Failed to sign up.');
       }
@@ -48,6 +49,7 @@ const SignUpForm = () => {
       setOpenSnackbar(true);
     }
   };
+  
 
   const handleCloseSnackbar = () => {
     setOpenSnackbar(false);

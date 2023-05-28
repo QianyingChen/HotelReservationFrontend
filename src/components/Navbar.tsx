@@ -62,7 +62,7 @@ export default function Navbar() {
                 >
                   <MenuItem onClick={()=>i18n.changeLanguage('en')} >{t('English')}</MenuItem>
                   <MenuItem onClick={()=>i18n.changeLanguage('ta')}>{t('Tamil')}</MenuItem>
-                  <MenuItem onClick={()=>i18n.changeLanguage('zh')}>{t('Chinese')}</MenuItem>
+                  <MenuItem onClick={()=>i18n.changeLanguage('cn')}>{t('Chinese')}</MenuItem>
                 </Menu>
               </Box>
       </ul>

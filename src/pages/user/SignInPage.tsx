@@ -10,11 +10,10 @@ type SignInFormData = {
   password: string;
 };
 
-const SignInForm = () => {
+const SignInPage = () => {
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState('');
   const { register, handleSubmit, formState: { errors } } = useForm<SignInFormData>();
- // const [signInUser, { isError }] = useSignInUserMutation();
   const [signInUser] = useSignInUserMutation();
   const navigate = useNavigate();
 
@@ -28,7 +27,7 @@ const SignInForm = () => {
       if ('data' in response) {
         setSnackbarMessage('User signed in successfully!');
         setOpenSnackbar(true);
-        navigate('/users'); // Redirect to the user page
+        navigate(`/users/${response.data.userId}`); // Redirect to the authenticated user's page
       } else {
         throw new Error('Failed to sign in.');
       }
@@ -85,7 +84,7 @@ const SignInForm = () => {
               </Grid>
             </Grid>
             <Grid item xs={12} sx={{ textAlign: 'center', marginTop: '16px' }}>
-            <Link to="/users/signup">Don't have an account? Sign up</Link>
+              <Link to="/users/signup">Don't have an account? Sign up</Link>
             </Grid>
           </form>
         </CardContent>
@@ -101,5 +100,4 @@ const SignInForm = () => {
   );
 };
 
-export default SignInForm;
-
+export default SignInPage;

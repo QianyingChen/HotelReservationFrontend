@@ -3,20 +3,17 @@ import { Button, Card, CardActionArea, CardActions, CardContent, Grid, TextField
 import { Link } from 'react-router-dom';
 import 'react-date-range/dist/styles.css'; 
 import 'react-date-range/dist/theme/default.css'; 
-//import User from '../pages/user/Reseve';
 import { useTranslation } from 'react-i18next';
-
-
-
 
 export default function MultiActionAreaCard() {
   const [locationName, setLocationName] = useState<string>("New York");
   const [adults, setAdults] = useState<number>(2);
   const [children, setChildren] = useState<number>(0);
+  
   // Get today's date
   const today = new Date();
 
-  // Calculate the check-out date as one week later
+  // set default check-out date as one week later
   const oneWeekLater = new Date(today.getTime() + 7 * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
 
   // Initialize the check-in and check-out dates using useState hook
@@ -31,7 +28,7 @@ export default function MultiActionAreaCard() {
     if (selectedDate >= today) {
       setCheckInDate(event.target.value);
 
-      // Calculate the new check-out date as one week later
+      // set default new check-out date as one week later
       if (selectedDate <= new Date(checkOutDate)) {
         setCheckOutDate(new Date(selectedDate.getTime() + 7 * 24 * 60 * 60 * 1000).toISOString().split('T')[0]);
       }
@@ -57,10 +54,12 @@ export default function MultiActionAreaCard() {
   };
 
   const myFormData  = {
-    inDate:"hello",
+    inDate:checkInDate,
     outDate:checkOutDate,
     adultsCount:adults,
+    childrenCount: children
   }
+  console.log(myFormData)
 
   const {t}=useTranslation();
 
@@ -133,13 +132,10 @@ export default function MultiActionAreaCard() {
         </CardContent>
       </CardActionArea>
       <CardActions>
-      <Link  to={`/hotels/${locationName}`} state={{myFormData}} >
-        <Button 
-            variant="contained" 
-            size="large"
-          >
-            {t('Search')} 
-          </Button>
+          <Link to={`/hotels/${locationName}`} state={myFormData}>
+            <Button variant="contained" size="large">
+               {t('Search')}
+             </Button>
           </Link>
       </CardActions>
     </Card>

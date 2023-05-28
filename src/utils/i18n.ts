@@ -44,8 +44,22 @@ i18n.use(initReactI18next).init({
             }
          },
          // //Chinese Translation
-         zh:{
+         cn:{
             translation:{
+                "Hotels":"酒店",
+                "Register":"注册",
+                "Sign in":"登录",
+                "English":"英语",
+                "Tamil":"泰米尔语",
+                "Chinese":"中文",
+                "Search":"搜索",
+                "Find places to stay on Grand Vista":"在远景上找到住宿地点",
+                "Discover hotels and rooms perfect for any trip":"探索适合任何旅行的完美酒店和客房",
+                "Location":"目的地",
+                "Check-in":"入住日期",
+                "Check-out":"退房日期",
+                "Adults" :"成人",
+                "Children":"儿童"
 
             }
          }

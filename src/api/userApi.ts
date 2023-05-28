@@ -1,7 +1,8 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-//import store from "../store";
+
 
 export type User = {
+    id: any;
     userId?: number;
     firstName: string;
     lastName: string;
@@ -11,7 +12,7 @@ export type User = {
     phoneNumber: string;
 }
 
-interface SignInFormData {
+export interface SignInFormData {
     username: string;
     password: string;
   }
@@ -19,7 +20,7 @@ interface SignInFormData {
 
 export const userApi = createApi({
     reducerPath:'userApi',
-    baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:8080/' }),
+    baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:5000/' }),
     // API endpints
     endpoints: (builder) => ({
         getAllUsers: builder.query<User[], void>({

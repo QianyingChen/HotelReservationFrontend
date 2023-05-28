@@ -6,31 +6,32 @@ import { Link,useParams,useLocation } from 'react-router-dom';
 import {Grid,Card,CardMedia,CardContent,Typography,CardActions,Button,CardHeader} from '@mui/material';
 import { useGetAllRoomsInHotelQuery,useGetAllAmenitiesInHotelQuery, Amenities, Room} from '../../api/hotelApi';
 
+
 export default function Hotel(){
-  
+ 
     const { id } = useParams();
     const {data:rooms}=useGetAllRoomsInHotelQuery(id);
     const{data:amenities}=useGetAllAmenitiesInHotelQuery(id);
     const hotelLocation = useLocation();
-    const{checkInDate}=hotelLocation.state;
-    const hotelSelected = hotelLocation.state?.hotel; 
+    // console.log(`HOTEL COMPONENT: ${hotelLocation}`)
+    // console.log(hotelLocation)
+    const{inDate, outDate, adultsCount, childrenCount} = hotelLocation?.state;
+    const hotelSelected = hotelLocation.state?.hotel;
 
-    // const{hotelData,checkInDate}=hotelLocation.state;
-    // const hotelSelected = hotelData.state?.hotel; 
 
     /** Get address of the selected hotel */
-    const address=`${hotelSelected.streetName}, 
+    const address=`${hotelSelected.streetName},
                     ${hotelSelected.phoneNumber}, ${hotelSelected.email}`;
     let address1;
                     {amenities?.map((amenity:Amenities) => (
                        address1=`${amenity.hotel.streetName},${amenity.hotel.location.city},${amenity.hotel.location.country},
                         ${amenity.hotel.postalCode},${amenity.hotel.phoneNumber},${amenity.hotel.email}`
                     ))}
-        
+       
    return(
         <>
         <h1>Hotel with Rooms Page {id}</h1>
-      
+     
         <Grid container spacing={2}>
          <Grid item xs={12} >
           <Card>
@@ -62,15 +63,15 @@ export default function Hotel(){
             </Grid>
                {rooms?.map((room:Room) => (
         <Grid item xs={12} sm={4} key={room.roomId}>
-          
+         
         <Card >
-        
+       
            <CardMedia
             component="img"
             height="140"
             image={room.imageUrl}
             alt={room.roomType}
-          /> 
+          />
           <CardContent>
             <Typography variant="h5" component="div">
               {room.roomType} Room
@@ -81,13 +82,13 @@ export default function Hotel(){
             </CardContent>
                  
           <CardActions style={{ justifyContent: 'space-between' }}>
-          <Typography variant="h6"  component="div" >${room.price}</Typography> 
-          <Link to={`/rooms/${room.roomId}/reserve`} state={{room,checkInDate}}  key={room.roomId}> 
+          <Typography variant="h6"  component="div" >${room.price}</Typography>
+          <Link to={`/rooms/${room.roomId}/reserve`} state={{room,inDate, outDate, adultsCount, childrenCount}}  key={room.roomId}>
                 <Button  variant="contained" size="small">Reserve</Button>
-          </Link>   
+          </Link>  
           </CardActions>
         </Card>
-        
+       
         </Grid>
          ))}
          </Grid>
