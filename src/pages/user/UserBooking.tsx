@@ -35,7 +35,7 @@ type ReservationData = {
   const { room, inDate, outDate, adultsCount, childrenCount, response } = (location.state as ReservationData) || {};
   // const { room, inDate, outDate, adultsCount, childrenCount, response } = location.state as ReservationData;
 //   console.log(response);
-console.log(shouldRedirect);
+  console.log(shouldRedirect);
 
   const checkInDate = new Date(inDate);
   const checkOutDate = new Date(outDate);

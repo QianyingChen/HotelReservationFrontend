@@ -30,7 +30,7 @@ export default function Hotel(){
        
    return(
         <>
-        <h1>Hotel with Rooms Page {id}</h1>
+        <h1>{hotelSelected.hotelName}</h1>
      
         <Grid container spacing={2}>
          <Grid item xs={12} >
