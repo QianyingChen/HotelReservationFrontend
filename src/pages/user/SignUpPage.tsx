@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Button, Card, CardContent, Grid, Snackbar, TextField } from '@mui/material';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useCreateUserMutation } from '../../api/userApi';
+import { Room } from '../../api/hotelApi';
 
 type SignUpFormData = {
   firstName: string;
@@ -12,6 +13,14 @@ type SignUpFormData = {
   email: string;
   phoneNumber: string;
 };
+type ReservationData = {
+  room: Room;
+  inDate: string;
+  outDate: string;
+  adultsCount: number;
+  childrenCount: number;
+};
+
 
 const SignUpForm = () => {
   const [openSnackbar, setOpenSnackbar] = useState(false);
@@ -20,7 +29,11 @@ const SignUpForm = () => {
   //const [createUser, { isError }] = useCreateUserMutation();
   const [createUser] = useCreateUserMutation();
   const navigate = useNavigate();
+  const location = useLocation();
 
+  const { room, inDate, outDate, adultsCount, childrenCount } = location.state as ReservationData;
+
+console.log(room);
   const onSubmit = async (data: SignUpFormData) => {
     try {
       const response = await createUser({
@@ -36,7 +49,7 @@ const SignUpForm = () => {
       if ('data' in response) {
         setSnackbarMessage('User signed up successfully!');
         setOpenSnackbar(true);
-        navigate(`/users/${response.data.userId}`); // Redirect to the user page with the user ID
+        navigate(`/users/${response.data.userId}`, {state:{ room, inDate, outDate, adultsCount, childrenCount ,response}}); // Redirect to the user page with the user ID
       } else {
         throw new Error('Failed to sign up.');
       }

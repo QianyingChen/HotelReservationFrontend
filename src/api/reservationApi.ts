@@ -1,12 +1,10 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 export type Reservation = {
-    map(arg0: (reservation: any) => import("react/jsx-runtime").JSX.Element): import("react").ReactNode;
     id?:number;
     checkInDate: string;
     checkOutDate: string;
     numGuests: number;
-    bookingDate: string;
     totalPrice: number;
     reservationStatus: string;
     roomId?: number;
@@ -23,7 +21,7 @@ export const reservationApi = createApi({
         getReservationById: builder.query<Reservation[], number>({
             query: id => `/reservations/${id}`
         }),
-        getReservationsByUserId: builder.query<Reservation, number>({
+        getReservationsByUserId: builder.query<Reservation[], number>({
             query: userId => `/reservations/users/${userId}`
         }),
         createReservation: builder.mutation<Reservation, Reservation>({

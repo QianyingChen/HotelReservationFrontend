@@ -8,7 +8,6 @@ import SignUpPage from './pages/user/SignUpPage'
 import SignInPage from './pages/user/SignInPage'
 import Reserve from './pages/user/Reserve'
 import UserComponent from './pages/user/UserComponent'
-import { ReactNode } from 'react'
 
 
 
@@ -24,21 +23,9 @@ function App() {
       <Route path='/hotels/' element={<HotelList/>}/>   
       <Route path='/hotels/:locationName' element={<HotelList/>}/> 
       <Route path='/hotels/:id/rooms' element={<Hotel/>}/>
-   {/* need to change later */}
-      <Route path='/users/:id' element={<UserComponent reservation={{
-          map: function (): ReactNode {
-            throw new Error('Function not implemented.')
-          },
-          id: undefined,
-          checkInDate: '',
-          checkOutDate: '',
-          numGuests: 0,
-          bookingDate: '',
-          totalPrice: 0,
-          reservationStatus: '',
-          roomId: undefined,
-          userId: undefined
-        }} />}/>  
+        <Route path='/users/:id' element={<UserComponent />} />
+        {/* <Route path='/users/:id' element={<UserPage />} /> */}
+
 
       <Route path='/rooms/:id/reserve' element={<Reserve/>}/>
       <Route  path="/users/signup" element={<SignUpPage/>} />

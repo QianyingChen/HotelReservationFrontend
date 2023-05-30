@@ -83,7 +83,8 @@ export default function Hotel(){
                  
           <CardActions style={{ justifyContent: 'space-between' }}>
           <Typography variant="h6"  component="div" >${room.price}</Typography>
-          <Link to={`/rooms/${room.roomId}/reserve`} state={{room,inDate, outDate, adultsCount, childrenCount}}  key={room.roomId}>
+          {/* <Link to={`/rooms/${room.roomId}/reserve`} state={{room,inDate, outDate, adultsCount, childrenCount}}  key={room.roomId}> */}
+          <Link to={'/users/signup'} state={{room,inDate, outDate, adultsCount, childrenCount}}  key={room.roomId}>
                 <Button  variant="contained" size="small">Reserve</Button>
           </Link>  
           </CardActions>
