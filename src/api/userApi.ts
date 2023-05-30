@@ -17,10 +17,10 @@ export interface SignInFormData {
     password: string;
   }
   
-
+  const apiUrl = import.meta.env.VITE_API_URL;
 export const userApi = createApi({
     reducerPath:'userApi',
-    baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:5000/' }),
+    baseQuery: fetchBaseQuery({ baseUrl: apiUrl }),
     // API endpints
     endpoints: (builder) => ({
         getAllUsers: builder.query<User[], void>({
