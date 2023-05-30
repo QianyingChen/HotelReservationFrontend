@@ -26,7 +26,7 @@ export default function HotelList(){
 
   return(
         <>
-        <h1>Hotels List Page1</h1>
+        {/* <h1>Hotels List Page1</h1> */}
        
         <h6>{currentlyNotAvailable}</h6>
         <Grid container spacing={4}>
