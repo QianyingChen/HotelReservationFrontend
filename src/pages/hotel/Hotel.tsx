@@ -13,8 +13,6 @@ export default function Hotel(){
     const {data:rooms}=useGetAllRoomsInHotelQuery(id);
     const{data:amenities}=useGetAllAmenitiesInHotelQuery(id);
     const hotelLocation = useLocation();
-    // console.log(`HOTEL COMPONENT: ${hotelLocation}`)
-    // console.log(hotelLocation)
     const{inDate, outDate, adultsCount, childrenCount} = hotelLocation?.state;
     const hotelSelected = hotelLocation.state?.hotel;
 
