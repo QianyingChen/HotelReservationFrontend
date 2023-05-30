@@ -29,13 +29,13 @@ type ReservationData = {
 
   const [editUser, setEditUser] = useState<User | null>(null);
   const [shouldRedirect, setShouldRedirect] = useState(false);
-  console.log(shouldRedirect);
-  
+
   const location = useLocation();
   const navigate = useNavigate();
 
   const { room, inDate, outDate, adultsCount, childrenCount, response } = location.state as ReservationData;
 //   console.log(response);
+console.log(shouldRedirect);
 
   const checkInDate = new Date(inDate);
   const checkOutDate = new Date(outDate);

@@ -51,10 +51,10 @@ export type Amenities={
   }
 }
 
-
+const apiUrl = import.meta.env.VITE_API_URL;
 export const hotelApi = createApi({
     reducerPath: 'hotelApi',
-    baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:5000/' }),
+    baseQuery: fetchBaseQuery({ baseUrl: apiUrl }),
     endpoints: (builder) => ({
       getAllHotels: builder.query<Hotel[], void>({
         query: () => '/hotels',

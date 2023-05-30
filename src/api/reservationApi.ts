@@ -10,10 +10,10 @@ export type Reservation = {
     roomId?: number;
     userId?:number;
   }
-
+  const apiUrl = import.meta.env.VITE_API_URL;
 export const reservationApi = createApi({
     reducerPath: 'reservationApi',
-    baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:5000/' }),
+    baseQuery: fetchBaseQuery({ baseUrl: apiUrl }),
     endpoints: (builder) => ({
         getAllReservations: builder.query<Reservation[], void>({
             query: () => '/reservations'
