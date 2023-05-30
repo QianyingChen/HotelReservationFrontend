@@ -1,5 +1,4 @@
 import { Link, useMatch, useResolvedPath } from "react-router-dom";
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import LanguageIcon from '@mui/icons-material/Language';
 import  { useState } from "react";
 import 'react-date-range/dist/styles.css'; 
@@ -29,29 +28,12 @@ export default function Navbar() {
       
       <ul>                  
           <CustomLink to='/hotels'>{t('Hotels')}</CustomLink> 
-          <CustomLink to='/users/signup'>{t('Register')}</CustomLink>
-          <CustomLink to='/users/signin'>{t('Sign in')}</CustomLink>
+          <CustomLink to='/signup'>{t('Register')}</CustomLink>
+          <CustomLink to='/signin'>{t('Sign in')}</CustomLink>
 
-           {/* Right - Language and User options */}
+           {/* Right - Language options */}
            <Box display="flex" justifyContent="flex-end">
 
-                <IconButton
-                  edge="end"
-                  aria-label="account of current user"
-                  aria-haspopup="true"
-                  onClick={handleMenuOpen}
-                  color="inherit"
-                >
-                  <AccountCircleIcon fontSize="medium"/>
-                </IconButton>
-                <Menu
-                  anchorEl={anchorEl}
-                  open={Boolean(anchorEl)}
-                  onClose={handleMenuClose}
-                >
-                  <MenuItem onClick={handleMenuClose} >Sign In</MenuItem>
-                  <MenuItem onClick={handleMenuClose}>Sign Up</MenuItem>
-                </Menu>
                 <IconButton color="inherit"  onClick={handleMenuOpen}>
                   <LanguageIcon fontSize="medium"/>
                 </IconButton>

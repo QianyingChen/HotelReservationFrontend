@@ -7,8 +7,9 @@ import Navbar from './components/Navbar'
 import SignUpPage from './pages/user/SignUpPage'
 import SignInPage from './pages/user/SignInPage'
 import Reserve from './pages/user/Reserve'
-import UserComponent from './pages/user/UserComponent'
+import UserComponent from './pages/user/UserBooking'
 import NotFoundPage from './pages/NotFoundPage'
+import UserPage from './pages/user/UserPage'
 
 
 
@@ -25,7 +26,10 @@ function App() {
       <Route path='/hotels/:locationName' element={<HotelList/>}/> 
       <Route path='/hotels/:id/rooms' element={<Hotel/>}/>
       <Route path='/users/:id' element={<UserComponent />} />
+      <Route path='/users/:id/details' element={<UserPage />} />
       <Route path='/rooms/:id/reserve' element={<Reserve/>}/>
+      <Route  path="/signup" element={<SignUpPage/>} />
+      <Route  path="/signin" element={<SignInPage/>} />
       <Route  path="/users/signup" element={<SignUpPage/>} />
       <Route  path="/users/signin" element={<SignInPage/>} />
       <Route path="*" element={<NotFoundPage />} />

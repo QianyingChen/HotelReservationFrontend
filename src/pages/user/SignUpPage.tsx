@@ -30,6 +30,7 @@ const SignUpForm = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
+
   const { room, inDate, outDate, adultsCount, childrenCount } = location.state as ReservationData;
 
   const onSubmit = async (data: SignUpFormData) => {
@@ -62,8 +63,6 @@ const SignUpForm = () => {
         setOpenSnackbar(true);
       });
   };
-
-
 
   const handleCloseSnackbar = () => {
     setOpenSnackbar(false);

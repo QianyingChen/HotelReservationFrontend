@@ -15,7 +15,7 @@ type ReservationData = {
   };
 
 // const UserComponent: React.FC<{ reservation: Reservation }> = () => {
-    const UserComponent = () => {
+  const UserComponent = () => {
   const { id } = useParams<{ id: string }>();
 //   const [ setEditReservation] = useState<Reservation | null>(null);
 
