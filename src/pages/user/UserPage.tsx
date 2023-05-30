@@ -1,172 +1,158 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { useGetUserByIdQuery, useUpdateUserMutation,User } from "../../api/userApi";
-import { useGetReservationsByUserIdQuery, useUpdateReservationMutation, Reservation } from "../../api/reservationApi";
-import { Button, TextField, Grid, Paper } from "@mui/material";
+import { useGetUserByIdQuery, useUpdateUserMutation, User } from '../../api/userApi';
+import { useGetReservationsByUserIdQuery, Reservation, useUpdateReservationMutation, useDeleteReservationMutation } from '../../api/reservationApi';
+import { Button, TextField, Grid, Paper, Typography, CardActions, Card, CardContent } from '@mui/material';
 
-
-const UserDisplay = function UserDisplay({
-  userData,
-  onEdit,
-  reservations,
-  onConfirmReservation,
-  onCancelReservation,
-}: {
-  userData: User;
-  onEdit: () => void;
-  reservations: Reservation[];
-  onConfirmReservation: (reservation: Reservation) => void;
-  onCancelReservation: (reservation: Reservation) => void;
-}) {
-  return (
-    <div>
-      <p>
-        Name: {userData.firstName} {userData.lastName}
-      </p>
-      <p>Email: {userData.email}</p>
-      <Button onClick={onEdit}>Edit</Button>
-
-
-      <h2>Booking Information</h2>
-      {reservations.map((reservation: Reservation) => (
-        <div key={reservation.id}>
-          <p>Reservation ID: {reservation.id}</p>
-          <p>Check-in Date: {reservation.checkInDate}</p>
-          <p>Check-out Date: {reservation.checkOutDate}</p>
-          <p>Number of Guests: {reservation.numGuests}</p>
-          <p>Total Price: {reservation.totalPrice}</p>
-          <p>Reservation Status: {reservation.reservationStatus}</p>
-          {reservation.reservationStatus === "Pending" && (
-            <Button onClick={() => onConfirmReservation(reservation)}>
-              Confirm
-            </Button>
-          )}
-          {(reservation.reservationStatus === "Pending" ||
-            reservation.reservationStatus === "Confirmed") && (
-            <Button onClick={() => onCancelReservation(reservation)}>
-              Cancel
-            </Button>
-          )}
-        </div>
-      ))}
-    </div>
-  );
-};
-
-
-// UserEditForm component
-const UserEditForm = function UserEditForm({
-  userData,
-  onSubmit,
-}: {
-  userData: User;
-  onSubmit: (newUserData: User) => void;
-}) {
-  const [firstName, setFirstName] = useState(userData.firstName);
-  const [lastName, setLastName] = useState(userData.lastName);
-  const [email, setEmail] = useState(userData.email);
-
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    onSubmit({ ...userData, firstName, lastName, email });
-  };
-
-
-  return (
-    <form onSubmit={handleSubmit}>
-      <TextField
-        value={firstName}
-        onChange={(e) => setFirstName(e.target.value)}
-        label="First Name"
-      />
-      <TextField
-        value={lastName}
-        onChange={(e) => setLastName(e.target.value)}
-        label="Last Name"
-      />
-      <TextField
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        label="Email"
-      />
-      <Button type="submit">Update</Button>
-    </form>
-  );
-};
-
-
-
-
-// UserComponent
-export default function UserPage() {
+const UserComponent = () => {
   const { id } = useParams<{ id: string }>();
 
-
   const { data: user, isError: userError } = useGetUserByIdQuery(Number(id));
-  const { data: reservations, isError: reservationsError } = useGetReservationsByUserIdQuery(Number(id));
-
+  const { data: reservations } = useGetReservationsByUserIdQuery(Number(id));
 
   const [updateUser] = useUpdateUserMutation();
   const [updateReservation] = useUpdateReservationMutation();
-
-
-
+  const [deleteReservation] = useDeleteReservationMutation();
+  const [editReservation, setEditReservation] = useState<Reservation | null>(null);
+  const [deleteReservationId, setDeleteReservationId] = useState<number | null>(null);
   const [editUser, setEditUser] = useState<User | null>(null);
-//   const [setEditReservation] = useState<Reservation | null>(null);
 
-
-  if (userError || reservationsError) {
-    return <div>Error loading user or reservations</div>;
+  if (userError) {
+    return <div>Error loading user</div>;
   }
-
 
   const handleUserUpdate = (newUserData: User) => {
     updateUser(newUserData);
     setEditUser(null);
   };
 
-
-//   const handleReservationUpdate = (newReservationData: Reservation) => {
-//     updateReservation(newReservationData);
-//     setEditReservation(null);
-//   };
-
-
-  const handleConfirmReservation = (reservation: Reservation) => {
-    updateReservation({ ...reservation, reservationStatus: "Confirmed" });
+  const handleReservationUpdate = (newReservationData: Reservation) => {
+    updateReservation(newReservationData);
+    setEditReservation(null);
   };
 
-
-  const handleCancelReservation = (reservation: Reservation) => {
-    updateReservation({ ...reservation, reservationStatus: "Cancelled" });
+  const handleReservationDelete = (reservationId: number) => {
+    deleteReservation(reservationId);
+    setDeleteReservationId(null);
   };
 
+  useEffect(() => {
+    if (deleteReservationId !== null) {
+      handleReservationDelete(deleteReservationId);
+    }
+  }, [deleteReservationId]);
 
   return (
-    <Grid container spacing={3}>
+    <Grid container spacing={3} justifyContent="center">
       <Grid item xs={6}>
-        <Paper elevation={3}>
-          <h2>User Information</h2>
+        <Paper elevation={3} style={{ padding: '20px', margin: '20px' }}>
+          <Typography variant="h4" gutterBottom>
+            User Information
+          </Typography>
           {user && reservations && (
-            <UserDisplay
-              userData={user}
-              onEdit={() => setEditUser(user)}
-              reservations={reservations}
-              onConfirmReservation={handleConfirmReservation}
-              onCancelReservation={handleCancelReservation}
-            />
-          )}
-          {editUser && (
-            <UserEditForm userData={editUser} onSubmit={handleUserUpdate} />
+            <div>
+              <Card>
+                <CardContent>
+                  <Typography variant="h6" gutterBottom>
+                    Username: {user.username}
+                  </Typography>
+                  <Typography variant="body1" gutterBottom>
+                    First Name: {user.firstName}
+                  </Typography>
+                  <Typography variant="body1" gutterBottom>
+                    Last Name: {user.lastName}
+                  </Typography>
+                  <Typography variant="body1" gutterBottom>
+                    Email: {user.email}
+                  </Typography>
+                  <Typography variant="body1" gutterBottom>
+                    Phone Number: {user.phoneNumber}
+                  </Typography>
+                </CardContent>
+                <CardActions>
+                  {editUser ? (
+                    <form onSubmit={() => handleUserUpdate(editUser)}>
+                      <TextField
+                        value={editUser.email}
+                        onChange={(e) => setEditUser({ ...editUser, email: e.target.value })}
+                        label="Email"
+                        fullWidth
+                      />
+                      <TextField
+                        value={editUser.phoneNumber}
+                        onChange={(e) => setEditUser({ ...editUser, phoneNumber: e.target.value })}
+                        label="Phone Number"
+                        fullWidth
+                      />
+                      <Button type="submit">Update</Button>
+                      <Button onClick={() => setEditUser(null)}>Cancel</Button>
+                    </form>
+                  ) : (
+                    <Button onClick={() => setEditUser(user)}>Edit</Button>
+                  )}
+                </CardActions>
+              </Card>
+
+              <Typography variant="h4" gutterBottom style={{ marginTop: '20px' }}>
+                Booking Information
+              </Typography>
+              {reservations.map((reservation) => (
+                <div key={reservation.id}>
+                  {/* Reservation details */}
+                  <Typography variant="body1" gutterBottom>
+                    Reservation ID: {reservation.id}
+                  </Typography>
+                  <Typography variant="body1" gutterBottom>
+                    Check-in Date: {reservation.checkInDate}
+                  </Typography>
+                  <Typography variant="body1" gutterBottom>
+                    Check-out Date: {reservation.checkOutDate}
+                  </Typography>
+                  <Typography variant="body1" gutterBottom>
+                    Number of Guests: {reservation.numGuests}
+                  </Typography>
+                  <Typography variant="body1" gutterBottom>
+                    Total Price: {reservation.totalPrice}
+                  </Typography>
+                  <Typography variant="body1" gutterBottom>
+                    Reservation Status: {reservation.reservationStatus}
+                  </Typography>
+
+                  {/* Actions */}
+                  {editReservation && reservation.id !== undefined && editReservation.id === reservation.id ? (
+                    <form onSubmit={() => handleReservationUpdate(editReservation)}>
+                      {/* Reservation update form */}
+                      <TextField
+                        value={editReservation.numGuests}
+                        onChange={(e) => {
+                          const newNumGuests = parseInt(e.target.value, 10);
+                          if (newNumGuests <= 4) {
+                            setEditReservation({ ...editReservation, numGuests: newNumGuests });
+                          }
+                        }}
+                        label="Number of Guests"
+                        type="number"
+                        inputProps={{ min: 1, max: 4 }}
+                        fullWidth
+                      />
+                      <Button type="submit">Update</Button>
+                      <Button onClick={() => setEditReservation(null)}>Cancel</Button>
+                    </form>
+                  ) : (
+                    <div>
+                      <Button onClick={() => setEditReservation(reservation)}>Update Reservation</Button>
+                      <Button onClick={() => setDeleteReservationId(reservation.id || null)}>Cancel Reservation</Button>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
           )}
         </Paper>
       </Grid>
     </Grid>
   );
-}
+};
 
-
-
-
+export default UserComponent;
 

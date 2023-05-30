@@ -102,6 +102,8 @@ type ReservationData = {
       //const reservation = createReservation(reservationObj);
     
       handleReservation(reservationObj);
+      navigate(`/users/:id/details`); 
+      // navigate(`/users/${userId}/details`);
      
     } else {
       sessionStorage.setItem('pendingReservation', JSON.stringify(location.state));
