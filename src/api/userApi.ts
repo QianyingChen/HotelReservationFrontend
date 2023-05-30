@@ -17,7 +17,7 @@ export interface SignInFormData {
     password: string;
   }
 
-  type SignUpFormData = {
+export  type SignUpFormData = {
     firstName: string;
     lastName: string;
     username: string;
@@ -38,6 +38,15 @@ export const userApi = createApi({
         getUserById: builder.query<User, number>({
             query: userId => `users/${userId}`
         }),
+        //  createUser: builder.mutation<User, User>({
+        //     query:(user) => {
+        //         return {
+        //             method: 'POST',
+        //             url:'/users',
+        //             body: user
+        //         }
+        //     }
+        // }),
         createUser: builder.mutation<any, SignUpFormData>({
             query: (data) => ({
               url: '/users',

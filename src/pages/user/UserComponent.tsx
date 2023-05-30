@@ -26,22 +26,20 @@ type ReservationData = {
 //   const [updateReservation] = useUpdateReservationMutation();
   const [createReservation] = useCreateReservationMutation();
   const [deleteReservation] = useDeleteReservationMutation();
-
   const [editUser, setEditUser] = useState<User | null>(null);
   const [shouldRedirect, setShouldRedirect] = useState(false);
 
   const location = useLocation();
   const navigate = useNavigate();
 
-  const { room, inDate, outDate, adultsCount, childrenCount, response } = location.state as ReservationData;
+  const { room, inDate, outDate, adultsCount, childrenCount, response } = (location.state as ReservationData) || {};
+  // const { room, inDate, outDate, adultsCount, childrenCount, response } = location.state as ReservationData;
 //   console.log(response);
   console.log(shouldRedirect);
 
   const checkInDate = new Date(inDate);
   const checkOutDate = new Date(outDate);
-
   const totalDays = Math.ceil((checkOutDate.getTime() - checkInDate.getTime()) / (1000 * 60 * 60 * 24));
-
   const totalPrice = totalDays * room?.price;
 
 
@@ -91,8 +89,10 @@ type ReservationData = {
     numGuests: adultsCount + childrenCount,
     totalPrice,
     reservationStatus: "comfirm",
-    roomId: room.roomId,
-    userId: user?.userId || undefined,
+    roomId: room?.roomId || 0,
+    userId: user?.userId || 0,
+    // roomId: room.roomId,
+    // userId: user?.userId || undefined,
   }
 
   const onConfirmReservation = () => {

@@ -24,14 +24,10 @@ function App() {
       <Route path='/hotels/' element={<HotelList/>}/>   
       <Route path='/hotels/:locationName' element={<HotelList/>}/> 
       <Route path='/hotels/:id/rooms' element={<Hotel/>}/>
-        <Route path='/users/:id' element={<UserComponent />} />
-        {/* <Route path='/users/:id' element={<UserPage />} /> */}
-
-
+      <Route path='/users/:id' element={<UserComponent />} />
       <Route path='/rooms/:id/reserve' element={<Reserve/>}/>
       <Route  path="/users/signup" element={<SignUpPage/>} />
       <Route  path="/users/signin" element={<SignInPage/>} />
-      {/* Error Page */}
       <Route path="*" element={<NotFoundPage />} />
       </Routes>
 
