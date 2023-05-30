@@ -28,13 +28,14 @@ type ReservationData = {
   const [deleteReservation] = useDeleteReservationMutation();
 
   const [editUser, setEditUser] = useState<User | null>(null);
-//   const [shouldRedirect, setShouldRedirect] = useState(false);
+  const [shouldRedirect, setShouldRedirect] = useState(false);
 
   const location = useLocation();
   const navigate = useNavigate();
 
   const { room, inDate, outDate, adultsCount, childrenCount, response } = location.state as ReservationData;
 //   console.log(response);
+console.log(shouldRedirect);
 
   const checkInDate = new Date(inDate);
   const checkOutDate = new Date(outDate);
@@ -105,7 +106,7 @@ type ReservationData = {
     } else {
       sessionStorage.setItem('pendingReservation', JSON.stringify(location.state));
       navigate('/users/signin', { state: { from: location.pathname } });
-    //   setShouldRedirect(true);
+      setShouldRedirect(true);
 
     }
   }
