@@ -3,20 +3,15 @@ import { Link,useLocation,useParams } from 'react-router-dom';
 import { Grid,Card,CardMedia,CardContent,Typography,CardActionArea, Alert, Tooltip,Fade } from '@mui/material';
 import { Hotel, useGetHotelsByLocationQuery } from '../../api/hotelApi';
 
-
-
-
 export default function HotelList(){
   const { locationName } = useParams();
   const {data:hotels} = useGetHotelsByLocationQuery(locationName as string);
-
 
   const myFormData  = useLocation()?.state;
   console.log(myFormData?.state);
 
 
-    // const roomSelected = roomDetails.state?.room;
- 
+ // const roomSelected = roomDetails.state?.room;
   const [currentlyNotAvailable ,setCurrentlyNotAvailable]=useState<JSX.Element | null>(null);
 
 
@@ -59,8 +54,7 @@ export default function HotelList(){
         </Card>
         </Link>
         </Grid>
-        ))}
-       
+        ))}      
       </Grid>
      
         </>
