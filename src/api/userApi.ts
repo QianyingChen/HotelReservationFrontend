@@ -54,19 +54,6 @@ export const userApi = createApi({
                 }
             }
         }),
-        // createUser: builder.mutation<any, SignUpFormData>({
-        //     query: (data) => ({
-        //       url: '/users',
-        //       method: 'POST',
-        //       body: data,
-        //     }),
-        //     transformResponse: (response: Response) => {  
-        //       if (!response.ok) {
-        //         return response.text();  // return text instead of JSON
-        //       }
-        //       return response.json();
-        //     }
-        //   }),
 
         updateUser: builder.mutation<User, User>({
             query: user => ({
@@ -103,8 +90,6 @@ export const userApi = createApi({
 export const {
     useGetAllUsersQuery,
     useGetUserByIdQuery,
-    // useGetUserByUsernameQuery,
-    // useGetUserIdByUsernameQuery,
     useCreateUserMutation,
     useUpdateUserMutation,
     useDeleteUserMutation,

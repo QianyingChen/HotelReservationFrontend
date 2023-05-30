@@ -10,8 +10,6 @@ import { useGetAllRoomsInHotelQuery,useGetAllAmenitiesInHotelQuery, Amenities, R
 export default function Hotel(){
  
     const { id } = useParams();
-    // const {data:rooms}=useGetAllRoomsInHotelQuery(id);
-    // const{data:amenities}=useGetAllAmenitiesInHotelQuery(id);
     const { data: rooms } = useGetAllRoomsInHotelQuery(Number(id)); // Pass the hotelId as a number
     const { data: amenities } = useGetAllAmenitiesInHotelQuery(Number(id)); // Pass the hotelId as a number
     const hotelLocation = useLocation();

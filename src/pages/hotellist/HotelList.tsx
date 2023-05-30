@@ -11,7 +11,7 @@ export default function HotelList(){
   console.log(myFormData?.state);
 
 
- // const roomSelected = roomDetails.state?.room;
+
   const [currentlyNotAvailable ,setCurrentlyNotAvailable]=useState<JSX.Element | null>(null);
 
 

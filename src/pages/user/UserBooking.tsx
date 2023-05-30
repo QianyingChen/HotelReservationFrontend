@@ -14,16 +14,15 @@ type ReservationData = {
     response:any;
   };
 
-// const UserComponent: React.FC<{ reservation: Reservation }> = () => {
+
   const UserComponent = () => {
   const { id } = useParams<{ id: string }>();
-//   const [ setEditReservation] = useState<Reservation | null>(null);
+
 
   const { data: user, isError: userError } = useGetUserByIdQuery(Number(id));
   const { data: reservations} = useGetReservationsByUserIdQuery(Number(id));
 
   const [updateUser] = useUpdateUserMutation();
-//   const [updateReservation] = useUpdateReservationMutation();
   const [createReservation] = useCreateReservationMutation();
   const [deleteReservation] = useDeleteReservationMutation();
   const [editUser, setEditUser] = useState<User | null>(null);
@@ -33,8 +32,7 @@ type ReservationData = {
   const navigate = useNavigate();
 
   const { room, inDate, outDate, adultsCount, childrenCount, response } = (location.state as ReservationData) || {};
-  // const { room, inDate, outDate, adultsCount, childrenCount, response } = location.state as ReservationData;
-//   console.log(response);
+;
   console.log(shouldRedirect);
 
   const checkInDate = new Date(inDate);
@@ -64,23 +62,6 @@ type ReservationData = {
     }
   };
 
-// const handleReservation = async (reservation: Reservation, isNew: boolean) => {
-//     try {
-//       console.log("User details "+ user);
-//       if (isNew) {
-//         await createReservation(reservation).unwrap();
-//       } else {
-//         await updateReservation(reservation).unwrap();
-//       }
-//       if (user) {
-//         navigate(`/users/${user.userId}`, {state:{ room, inDate, outDate, adultsCount, childrenCount ,response}});
-//       }
-//     } catch (error) {
-//       console.error('Failed to reserve:', error);
-//     }
-// };
-
-
 
   const reservationObj ={
     id:50,
@@ -91,8 +72,6 @@ type ReservationData = {
     reservationStatus: "comfirm",
     roomId: room?.roomId || 0,
     userId: user?.userId || 0,
-    // roomId: room.roomId,
-    // userId: user?.userId || undefined,
   }
 
   const onConfirmReservation = () => {
@@ -116,16 +95,6 @@ type ReservationData = {
     }
   };
 
-//   const handleReservationUpdate = async (reservation: Reservation) => {
-//     try {
-//       await updateReservation(reservation).unwrap();
-//       if (user) {
-//         navigate(`/users/${user.userId}`, {state:{ room, inDate, outDate, adultsCount, childrenCount ,response}});
-//       }
-//     } catch (error) {
-//       console.error('Failed to update reservation:', error);
-//     }
-// };
 
 
   useEffect(() => {
@@ -252,7 +221,6 @@ type ReservationData = {
                     Reservation Status: {reservation.reservationStatus}
                   </Typography>
                   <Button onClick={() => handleReservationCancel(reservation)}>Cancel Reservation</Button>
-                  {/* <Button onClick={() => setEditReservation(reservation)}>Update Reservation</Button> */}
                 </div>
               ))}
 
