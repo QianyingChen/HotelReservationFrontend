@@ -8,6 +8,7 @@ import SignUpPage from './pages/user/SignUpPage'
 import SignInPage from './pages/user/SignInPage'
 import Reserve from './pages/user/Reserve'
 import UserComponent from './pages/user/UserComponent'
+import NotFoundPage from './pages/NotFoundPage'
 
 
 
@@ -30,6 +31,8 @@ function App() {
       <Route path='/rooms/:id/reserve' element={<Reserve/>}/>
       <Route  path="/users/signup" element={<SignUpPage/>} />
       <Route  path="/users/signin" element={<SignInPage/>} />
+      {/* Error Page */}
+      <Route path="*" element={<NotFoundPage />} />
       </Routes>
 
     </BrowserRouter>
