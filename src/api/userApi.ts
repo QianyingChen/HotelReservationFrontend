@@ -38,28 +38,35 @@ export const userApi = createApi({
         getUserById: builder.query<User, number>({
             query: userId => `users/${userId}`
         }),
-        //  createUser: builder.mutation<User, User>({
-        //     query:(user) => {
-        //         return {
-        //             method: 'POST',
-        //             url:'/users',
-        //             body: user
-        //         }
-        //     }
-        // }),
-        createUser: builder.mutation<any, SignUpFormData>({
-            query: (data) => ({
-              url: '/users',
-              method: 'POST',
-              body: data,
-            }),
-            transformResponse: (response: Response) => {  
-              if (!response.ok) {
-                return response.text();  // return text instead of JSON
-              }
-              return response.json();
+        getUserByUsername:builder.query<User, string>({
+            query: username => `users/username/${username}`
+        }),
+        getUserIdByUsername: builder.query<number, string>({
+            query: (username) => `users//username/${username}/userId`,
+        }),
+
+         createUser: builder.mutation<User, SignUpFormData>({
+            query:(user) => {
+                return {
+                    method: 'POST',
+                    url:'/users',
+                    body: user
+                }
             }
-          }),
+        }),
+        // createUser: builder.mutation<any, SignUpFormData>({
+        //     query: (data) => ({
+        //       url: '/users',
+        //       method: 'POST',
+        //       body: data,
+        //     }),
+        //     transformResponse: (response: Response) => {  
+        //       if (!response.ok) {
+        //         return response.text();  // return text instead of JSON
+        //       }
+        //       return response.json();
+        //     }
+        //   }),
 
         updateUser: builder.mutation<User, User>({
             query: user => ({
@@ -82,6 +89,13 @@ export const userApi = createApi({
               url: '/users/signin',
               body: formData
             })
+        }),
+        logInUser: builder.mutation<User, SignInFormData>({
+            query: (formData) => ({
+              method: 'POST',
+              url: '/users/login',
+              body: formData
+            })
         })
     })
 });
@@ -89,8 +103,11 @@ export const userApi = createApi({
 export const {
     useGetAllUsersQuery,
     useGetUserByIdQuery,
+    // useGetUserByUsernameQuery,
+    // useGetUserIdByUsernameQuery,
     useCreateUserMutation,
     useUpdateUserMutation,
     useDeleteUserMutation,
-    useSignInUserMutation
+    useSignInUserMutation,
+    useLogInUserMutation,
 } = userApi;

@@ -10,8 +10,10 @@ import { useGetAllRoomsInHotelQuery,useGetAllAmenitiesInHotelQuery, Amenities, R
 export default function Hotel(){
  
     const { id } = useParams();
-    const {data:rooms}=useGetAllRoomsInHotelQuery(id);
-    const{data:amenities}=useGetAllAmenitiesInHotelQuery(id);
+    // const {data:rooms}=useGetAllRoomsInHotelQuery(id);
+    // const{data:amenities}=useGetAllAmenitiesInHotelQuery(id);
+    const { data: rooms } = useGetAllRoomsInHotelQuery(Number(id)); // Pass the hotelId as a number
+    const { data: amenities } = useGetAllAmenitiesInHotelQuery(Number(id)); // Pass the hotelId as a number
     const hotelLocation = useLocation();
     const{inDate, outDate, adultsCount, childrenCount} = hotelLocation?.state;
     const hotelSelected = hotelLocation.state?.hotel;
@@ -84,7 +86,7 @@ export default function Hotel(){
                
           <Typography variant="h6"  component="div" >${room.price}</Typography>
           {/* <Link to={`/rooms/${room.roomId}/reserve`} state={{room,inDate, outDate, adultsCount, childrenCount}}  key={room.roomId}> */}
-          <Link to={'/users/signup'} state={{room,inDate, outDate, adultsCount, childrenCount}}  key={room.roomId}>
+          <Link to={'/users/signup'} state={{room, inDate, outDate, adultsCount, childrenCount}}  key={room.roomId}>
                 <Button  variant="contained" size="small" disabled={!room.availability}>Reserve</Button>
           </Link>  
           </CardActions>

@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Button, Card, CardContent, Grid, Snackbar, TextField } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
-import { useSignInUserMutation } from '../../api/userApi';
+import {  useNavigate } from 'react-router-dom';
+import { useLogInUserMutation } from '../../api/userApi';
 import { Link } from 'react-router-dom';
 // import { useCreateReservationMutation } from '../../api/reservationApi';
 // import { Room } from '../../api/hotelApi';
@@ -24,15 +24,16 @@ const SignInPage = () => {
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState('');
   const { register, handleSubmit, formState: { errors } } = useForm<SignInFormData>();
-  const [signInUser] = useSignInUserMutation();
+  // const [signInUser] = useSignInUserMutation();
+  const [logInUser] = useLogInUserMutation();
   // const [createReservation] = useCreateReservationMutation();
   const navigate = useNavigate();
-  // const location = useLocation();
-  // {/* const { room, inDate, outDate, adultsCount, childrenCount } = location.state as ReservationData; *
+//   const location = useLocation();
+// const { room, inDate, outDate, adultsCount, childrenCount } = location.state as ReservationData; 
 
   const onSubmit = async (data: SignInFormData) => {
     try {
-      const response = await signInUser(data);
+      const response = await logInUser(data);
       if ('data' in response) {
         setSnackbarMessage('User signed in successfully!');
         setOpenSnackbar(true);
@@ -45,7 +46,8 @@ const SignInPage = () => {
           // navigate(`/rooms/${pendingReservation.roomId}/reserve`, { state:{ pendingReservation,response }});
           // navigate(`/users/${response.data.userId}`, {state:{ room, inDate, outDate, adultsCount, childrenCount ,response}}); 
         // } else {
-          navigate(`/users/${response.data.userId}`);
+          //navigate(`/users/${response.data.userId}`);
+          navigate('/users/:id/details');
         // }
       } else {
         throw new Error('Failed to sign in.');
