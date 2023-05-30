@@ -17,7 +17,8 @@ function NotFoundPage() {
       justifyContent="center"
       minHeight="100vh"
     >
-      <h1>Oops! The page you are looking for does not exist.</h1>
+      <h1>Oops!</h1>
+      <h2>The page you are looking for does not exist.</h2>
       <p>It doesn't matter, you can search again or click the button below to continue browsing Grand Vista</p>
       <Button variant="contained" onClick={handleHomeButtonClick}>
         Go to Home Page 
