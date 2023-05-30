@@ -77,13 +77,15 @@ export default function Hotel(){
             <Typography variant="body2" color="text.secondary">
               {room.roomDescription}
             </Typography>
+            <Typography>Availability: {room.availability ? 'Available' : 'Not Available'}</Typography>
             </CardContent>
                  
           <CardActions style={{ justifyContent: 'space-between' }}>
+               
           <Typography variant="h6"  component="div" >${room.price}</Typography>
           {/* <Link to={`/rooms/${room.roomId}/reserve`} state={{room,inDate, outDate, adultsCount, childrenCount}}  key={room.roomId}> */}
           <Link to={'/users/signup'} state={{room,inDate, outDate, adultsCount, childrenCount}}  key={room.roomId}>
-                <Button  variant="contained" size="small">Reserve</Button>
+                <Button  variant="contained" size="small" disabled={!room.availability}>Reserve</Button>
           </Link>  
           </CardActions>
         </Card>
