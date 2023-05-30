@@ -4,51 +4,33 @@ import { Button, Card, CardContent, Grid, Snackbar, TextField } from '@mui/mater
 import {  useNavigate } from 'react-router-dom';
 import { useLogInUserMutation } from '../../api/userApi';
 import { Link } from 'react-router-dom';
-// import { useCreateReservationMutation } from '../../api/reservationApi';
-// import { Room } from '../../api/hotelApi';
 
 type SignInFormData = {
   username: string;
   password: string;
 };
 
-// type ReservationData = {
-//   room: Room;
-//   inDate: string;
-//   outDate: string;
-//   adultsCount: number;
-//   childrenCount: number;
-// };
 
 const SignInPage = () => {
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState('');
   const { register, handleSubmit, formState: { errors } } = useForm<SignInFormData>();
-  // const [signInUser] = useSignInUserMutation();
+
   const [logInUser] = useLogInUserMutation();
-  // const [createReservation] = useCreateReservationMutation();
+
   const navigate = useNavigate();
-//   const location = useLocation();
-// const { room, inDate, outDate, adultsCount, childrenCount } = location.state as ReservationData; 
+
 
   const onSubmit = async (data: SignInFormData) => {
     try {
       const response = await logInUser(data);
       if ('data' in response) {
+        console.log(response.data);
         setSnackbarMessage('User signed in successfully!');
         setOpenSnackbar(true);
-        // const pendingReservationItem = sessionStorage.getItem('pendingReservation');
-        // if (pendingReservationItem) {
-        //   const pendingReservation = JSON.parse(pendingReservationItem);
-        //   await createReservation(pendingReservation);
-        //   sessionStorage.removeItem('pendingReservation');
-        //   console.log(response);
-          // navigate(`/rooms/${pendingReservation.roomId}/reserve`, { state:{ pendingReservation,response }});
-          // navigate(`/users/${response.data.userId}`, {state:{ room, inDate, outDate, adultsCount, childrenCount ,response}}); 
-        // } else {
-          //navigate(`/users/${response.data.userId}`);
-          navigate('/users/:id/details');
-        // }
+  
+        // navigate to the user details page using the actual user id
+        navigate(`/users/${response.data.id}/details`);
       } else {
         throw new Error('Failed to sign in.');
       }
