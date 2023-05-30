@@ -16,6 +16,15 @@ export interface SignInFormData {
     username: string;
     password: string;
   }
+
+  type SignUpFormData = {
+    firstName: string;
+    lastName: string;
+    username: string;
+    password: string;
+    email: string;
+    phoneNumber: string;
+  }
   
 
 export const userApi = createApi({
@@ -29,15 +38,29 @@ export const userApi = createApi({
         getUserById: builder.query<User, number>({
             query: userId => `users/${userId}`
         }),
-        createUser: builder.mutation<User, User>({
-            query:(user) => {
-                return {
-                    method: 'POST',
-                    url:'/users',
-                    body: user
-                }
+        // createUser: builder.mutation<User, User>({
+        //     query:(user) => {
+        //         return {
+        //             method: 'POST',
+        //             url:'/users',
+        //             body: user
+        //         }
+        //     }
+        // }),
+        createUser: builder.mutation<any, SignUpFormData>({
+            query: (data) => ({
+              url: '/users',
+              method: 'POST',
+              body: data,
+            }),
+            transformResponse: (response: Response) => {  
+              if (!response.ok) {
+                return response.text();  // return text instead of JSON
+              }
+              return response.json();
             }
-        }),
+          }),
+
         updateUser: builder.mutation<User, User>({
             query: user => ({
                 method:'PUT',

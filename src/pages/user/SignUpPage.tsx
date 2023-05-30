@@ -21,48 +21,46 @@ type ReservationData = {
   childrenCount: number;
 };
 
-
 const SignUpForm = () => {
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState('');
   const { register, handleSubmit, formState: { errors } } = useForm<SignUpFormData>();
-  //const [createUser, { isError }] = useCreateUserMutation();
   const [createUser] = useCreateUserMutation();
+
   const navigate = useNavigate();
   const location = useLocation();
 
   const { room, inDate, outDate, adultsCount, childrenCount } = location.state as ReservationData;
 
-console.log(room);
   const onSubmit = async (data: SignUpFormData) => {
-    try {
-      const response = await createUser({
-        firstName: data.firstName,
-        lastName: data.lastName,
-        username: data.username,
-        password: data.password,
-        email: data.email,
-        phoneNumber: data.phoneNumber,
-        id: undefined
-      });
-  
-      if ('data' in response) {
+    await createUser({
+      firstName: data.firstName,
+      lastName: data.lastName,
+      username: data.username,
+      password: data.password,
+      email: data.email,
+      phoneNumber: data.phoneNumber,
+    }).unwrap()
+      .then((response) => {
         setSnackbarMessage('User signed up successfully!');
         setOpenSnackbar(true);
-        navigate(`/users/${response.data.userId}`, {state:{ room, inDate, outDate, adultsCount, childrenCount ,response}}); // Redirect to the user page with the user ID
-      } else {
-        throw new Error('Failed to sign up.');
-      }
-    } catch (error: any) {
-      if (error.response?.data?.message === 'Username is already taken') {
-        setSnackbarMessage('User name already taken');
-      } else {
-        setSnackbarMessage('Failed to sign up. Please try again later.');
-      }
-      setOpenSnackbar(true);
-    }
+        navigate(`/users/${response.userId}`, {state:{ room, inDate, outDate, adultsCount, childrenCount ,response}});
+      })
+      .catch((error: any) => {
+        if ('data' in error) {
+          const errorMessage = error.data as string;
+          if (errorMessage.includes('Username is already taken')) {
+            setSnackbarMessage('Username is already taken');
+          } else {
+            setSnackbarMessage('Failed to sign up. Please try again later.');
+          }
+        } else {
+          setSnackbarMessage('Failed to sign up. Please try again later.');
+        }
+        setOpenSnackbar(true);
+      });
   };
-  
+
 
   const handleCloseSnackbar = () => {
     setOpenSnackbar(false);

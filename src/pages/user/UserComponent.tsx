@@ -28,8 +28,9 @@ type ReservationData = {
   const [deleteReservation] = useDeleteReservationMutation();
 
   const [editUser, setEditUser] = useState<User | null>(null);
-//   const [shouldRedirect, setShouldRedirect] = useState(false);
-
+  const [shouldRedirect, setShouldRedirect] = useState(false);
+  console.log(shouldRedirect);
+  
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -105,7 +106,7 @@ type ReservationData = {
     } else {
       sessionStorage.setItem('pendingReservation', JSON.stringify(location.state));
       navigate('/users/signin', { state: { from: location.pathname } });
-    //   setShouldRedirect(true);
+      setShouldRedirect(true);
 
     }
   }
