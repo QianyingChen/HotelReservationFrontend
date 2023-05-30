@@ -47,6 +47,8 @@ const SignUpForm = () => {
         navigate(`/users/${response.userId}`, {state:{ room, inDate, outDate, adultsCount, childrenCount ,response}});
       })
       .catch((error: any) => {
+        console.error(error);
+        // Check if the error is indeed a FetchBaseQueryError
         if ('data' in error) {
           const errorMessage = error.data as string;
           if (errorMessage.includes('Username is already taken')) {
@@ -60,6 +62,7 @@ const SignUpForm = () => {
         setOpenSnackbar(true);
       });
   };
+
 
 
   const handleCloseSnackbar = () => {
