@@ -96,22 +96,15 @@ type ReservationData = {
   }
 
   const onConfirmReservation = () => {
-
-    //createReservation(reservationObj);
     if (user) {
-      //const reservation = createReservation(reservationObj);
-    
       handleReservation(reservationObj);
-      navigate(`/users/:id/details`); 
-      // navigate(`/users/${userId}/details`);
-     
+      navigate(`/users/${user.userId}/details`);
     } else {
       sessionStorage.setItem('pendingReservation', JSON.stringify(location.state));
       navigate('/users/signin', { state: { from: location.pathname } });
       setShouldRedirect(true);
-
     }
-  }
+  };
   const handleReservationCancel = async (reservation: Reservation) => {
     try {
       await deleteReservation(reservation.id || 0).unwrap();
